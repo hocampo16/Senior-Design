@@ -25,4 +25,4 @@ This project focuses on developing a low-cost multispectral imaging system to as
 ## Data Visualization & Analysis
 - NDVI heatmaps generated for plant hydration assessment.
 - Sample visualization:
-![NDVI Sample](https://nyinstituteoftechnology-my.sharepoint.com/shared?listurl=%2Fpersonal%2Fziqian%5Fdong%5Fnyit%5Fedu%2FDocuments&id=%2Fpersonal%2Fziqian%5Fdong%5Fnyit%5Fedu%2FDocuments%2FEENG%20489%20Senior%20Design%20Fall%202024%2FPlant%20Phenotyping%2FProject%20Files%2Fproject%203%2D14%2D2025%2FNIRRGB%5Fredbands%2Fredband%5Fnirrgb%5F03%2D14%2D2025%5F132408%2Ejpg&parent=%2Fpersonal%2Fziqian%5Fdong%5Fnyit%5Fedu%2FDocuments%2FEENG%20489%20Senior%20Design%20Fall%202024%2FPlant%20Phenotyping%2FProject%20Files%2Fproject%203%2D14%2D2025%2FNIRRGB%5Fredbands)
+![NDVI Sample](https://github.com/hocampo16/Senior-Design/blob/main/redband_nirrgb_03-14-2025_132408.jpg)
