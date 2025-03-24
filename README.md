@@ -25,4 +25,4 @@ This project focuses on developing a low-cost multispectral imaging system to as
 ## Data Visualization & Analysis
 - NDVI heatmaps generated for plant hydration assessment.
 - Sample visualization:
-![NDVI Sample](https://github.com/hocampo16/Senior-Design/blob/main/redband_nirrgb_03-14-2025_132408.jpg)
+![NDVI Sample](https://github.com/hocampo16/Senior-Design/blob/main/ndvi_sample_result.jpg)
