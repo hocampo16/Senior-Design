@@ -23,6 +23,6 @@ This project focuses on developing a low-cost multispectral imaging system to as
 - **Raspberry Pi OS**
 
 ## Data Visualization & Analysis
-- NDVI heatmaps generated for plant hydration assessment.
+- NDVI monochrom image generated for plant hydration assessment.
 - Sample visualization:
 ![NDVI Sample](https://github.com/hocampo16/Senior-Design/blob/main/ndvi_sample_result.jpg)
