@@ -87,4 +87,3 @@ ndvi_norm = ((ndvi_image - ndvi_min) / (ndvi_max - ndvi_min) * 255).astype(np.ui
 
 cv2.imwrite("NDVI_results/ndvi_result"+timestr+".jpg", ndvi_norm)
 Image.fromarray(ndvi_norm).show()
-#comment this is a test
