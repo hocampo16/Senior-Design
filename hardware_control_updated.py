@@ -70,6 +70,20 @@ cv2.imwrite("RGB_redbands/redband_rgb_"+timestr+".jpg",redband_rgb) #diagnostic
 
 ndvi_image = calcNDVI (gained_nir,gained_red)
 
-ndvi_norm = ((ndvi_image +1) /2 *255).astype(np.uint8) #normalizes for outputting images
+# added code for contrasting set directly towards our image 
+ndvi_min = np.min(ndvi_image)
+ndvi_max = np.max(ndvi_image)
+ndvi_norm = ((ndvi_image - ndvi_min) / (ndvi_max - ndvi_min) * 255).astype(np.uint8)
+#ndvi_norm = ((ndvi_image +1) /2 *255).astype(np.uint8) #normalizes for outputting images
+
+## could also try the code below if we want to clip our image to the general min and max of -1 and 1 
+##Define expected NDVI range (typically -1 to 1)
+#ndvi_min_expected = -1
+#ndvi_max_expected = 1
+
+## Clip NDVI values 
+#ndvi_clipped = np.clip(ndvi_image, ndvi_min_expected, ndvi_max_expected)
+#ndvi_norm = ((ndvi_clipped - ndvi_min_expected) / (ndvi_max_expected - ndvi_min_expected) * 255).astype(np.uint8)
+
 cv2.imwrite("NDVI_results/ndvi_result"+timestr+".jpg", ndvi_norm)
 Image.fromarray(ndvi_norm).show()
