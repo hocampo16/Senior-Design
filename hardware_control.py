@@ -12,19 +12,36 @@ cam = Camera()
 timestr = time.strftime("%m-%d-%Y_%H%M%S")
 
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(3, GPIO.OUT)
-pwm=GPIO.PWM(3,50)
-pwm.start(0)
+
 nirgain = 1 #gain value for NIR image, may not be necessary
 rgbgain = 1
 
-def setAngle(angle):
-    duty = angle / 18 + 2
-    GPIO.output(3,True)
-    pwm.ChangeDutyCycle(duty)
-    time.sleep(1) #time in seconds
-    GPIO.output(3,False)
-    pwm.ChangeDutyCycle(0)
+def init():
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(13,GPIO.OUT)
+    GPIO.setup(15,GPIO.OUT)
+
+def off():
+    init()
+    GPIO.output(13,False)
+    GPIO.output(15,False)
+    GPIO.cleanup()
+    
+def forward(sec):
+    init()
+    GPIO.output(13,True)
+    GPIO.output(15,False)
+    time.sleep(sec)
+    GPIO.cleanup()
+    off()
+    
+def back(sec):
+    init()
+    GPIO.output(13,False)
+    GPIO.output(15,True)
+    time.sleep(sec)
+    GPIO.cleanup()
+    off()
 
 def calcNDVI (nir, red):
      top = (nir.astype(float) - red.astype(float))
@@ -36,18 +53,11 @@ def calcNDVI (nir, red):
      return ndvi 
 
 #take photos ===================================================================================================================
-setAngle(0)
-time.sleep(1)
 cam.take_photo("nir.jpg")
-setAngle(150)
-time.sleep(4)
+back(0.5)
+time.sleep(0.5)
 cam.take_photo("nirrgb.jpg")
-setAngle(0)
-
-#GPIO cleaning, put this after you are done using GPIO code
-pwm.stop()
-GPIO.cleanup()
-
+forward(0.4)
 
 #calculating NDVI ===============================================================================================================
 
@@ -56,10 +66,12 @@ nir = cv2.imread("nir.jpg")
 nirrgb = cv2.imread("nirrgb.jpg")
 
 redband_nirrgb = nirrgb[:,:,2]
+#redband_nirrgb = redband_nirrgb[600:2100,700:4000]
 redband_nirrgb = (cv2.normalize(redband_nirrgb, None, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX,dtype=cv2.CV_32F)*255).astype(np.uint8)
 cv2.imwrite("NIRRGB_redbands/redband_nirrgb_"+timestr+".jpg",redband_nirrgb)
 
 redband_nir = nir[:,:,2]
+#redband_nir = redband_nir[600:2100,700:4000]
 redband_nir = (cv2.normalize(redband_nir, None, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX,dtype=cv2.CV_32F)*255).astype(np.uint8)
 #redband_nir = (np.sqrt(cv2.normalize(redband_nir, None, alpha=0, beta=1, norm_type=cv2.NORM_MINMAX,dtype=cv2.CV_32F))*255).astype(np.uint8)
 gained_nir = np.clip(redband_nir * nirgain, 0, 255).astype(np.uint8)

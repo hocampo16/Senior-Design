@@ -7,7 +7,7 @@ cam = Camera()
 cam.take_photo("helloworld.jpg")
 im = cv2.imread("helloworld.jpg")
 im = im[:,:,2]
-#im = im[900:2200,700:3800]
+im = im[600:2100,700:4000]
 print(np.max(im))
 print(np.min(im))
 #Image.fromarray(im).show()
