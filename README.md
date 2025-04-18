@@ -13,10 +13,10 @@ This project focuses on developing a low-cost multispectral imaging system to as
 
 ## Hardware & Software Requirements  
 ### Hardware  
-- NIR-IR Camera/Sensor (Raspberry Pi Camera)  
-- NDVI Filter (Red/NIR)  
-- Microcontroller (Raspberry Pi 5)  
-- LED Light Source for controlled imaging  
+- NIR-IR Camera/Sensor (Raspberry Pi HQ Camera)  
+- Adjustable Near Infrared Filter
+- Raspberry Pi 5  
+- 3W 730NM LED Chipset 
 
 ### Software  
 - **Python** (core programming)  
