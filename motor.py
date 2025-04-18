@@ -1,3 +1,5 @@
+#definitions for motor controls
+
 import RPi.GPIO as GPIO
 import time
 
@@ -10,14 +12,14 @@ def off():
     init()
     GPIO.output(13,False)
     GPIO.output(15,False)
-    GPIO.cleanup()
+    #GPIO.cleanup()
     
 def forward(sec):
     init()
     GPIO.output(13,True)
     GPIO.output(15,False)
     time.sleep(sec)
-    GPIO.cleanup()
+    #GPIO.cleanup()
     off()
     
 def back(sec):
@@ -25,21 +27,5 @@ def back(sec):
     GPIO.output(13,False)
     GPIO.output(15,True)
     time.sleep(sec)
-    GPIO.cleanup()
+    #GPIO.cleanup()
     off()
-
-off()
-# for i in range (100):
-forward(0.5)
-time.sleep(0.5)
-back(0.5)
-time.sleep(0.5)
-
-
-# init()
-# GPIO.output(15,True)
-# print("forward")
-# 
-# time.sleep(3)
-# GPIO.output(15,False)
-# print("backward")
