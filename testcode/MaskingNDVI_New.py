@@ -41,7 +41,7 @@ for files in os.scandir(dir_name):
     stressed_plant_pixels = np.count_nonzero(stressed_plant_mask)
 
     plant_percent = (plant_pixels / total_pixels) * 100
-    stress_percent_within_plants = (stressed_plant_pixels / plant_pixels) * 100 if plant_pixels > 0 else 0
+    stress_percent_within_plants = (stressed_plant_pixels / plant_pixels) * 100
 
         # Print results
         #print(f"Total plant area: {plant_percent:.2f}%")
@@ -58,7 +58,7 @@ for files in os.scandir(dir_name):
     data = {
         "Filename": [base_filename],
          "Plant Coverage (%)": [plant_percent],
-        "Stressed Area (%)": [stress_percent_within_plants]
+         "Stressed Area (%)": [stress_percent_within_plants]
     }
 
         # Convert to DataFrame
