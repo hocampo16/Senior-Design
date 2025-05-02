@@ -29,11 +29,11 @@ def back(sec):
     off()
 
 off()
-# for i in range (100):
-forward(0.5)
-time.sleep(0.5)
-back(0.5)
-time.sleep(0.5)
+for i in range (100):
+    forward(0.4)
+    time.sleep(0.5)
+    back(0.4)
+    time.sleep(0.5)
 
 
 # init()
