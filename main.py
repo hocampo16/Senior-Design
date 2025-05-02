@@ -6,10 +6,12 @@ import cv2
 import os
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
+from PIL import Image
 
 import motor
 import ndvi
 import maskingNDVI
+import irrigation
 
 
 #USER VARIABLES ==========================================================================================================================
@@ -27,7 +29,7 @@ boostGainRedBand = 30 #default 1
 
 #threshold values for determining what is is a plant, and how stressed they are from NDVI values (should be 0-1)
 plantThreshold = 0.1 #default 0.1
-stressThreshold = 0.2 #default 0.1
+stressThreshold = 0.25 #default 0.1
 
 #TAKE PHOTOS ===================================================================================================================
 
@@ -78,6 +80,20 @@ txt_path = "Masking_%.txt"
 maskingNDVI.mask(ndvi_image, plantThreshold, stressThreshold, dir_name, output_folder, timeStr)
 
 
+#IRRIGTION CODE==================================================================================================
+irrigation.open(3)
+time.sleep(30)
+irrigation.close(3)
+
+GPIO.cleanup()
 #FINISHING CODE =================================================================================================================
+
+plantImg = Image.open("Masking_Images/plant_mask_result_"+ timeStr +".jpg")
+stressImg = Image.open("Masking_Images/stressed_plant_mask_result_"+ timeStr +".jpg")
+
 print("done")
+
 plt.show()
+stressImg.show()
+plantImg.show()
+
