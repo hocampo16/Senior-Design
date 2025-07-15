@@ -26,15 +26,16 @@ def mask(ndvi, plant_threshold, stress_threshold, dir_name, output_folder, time_
     total_pixels = ndvi.size
     plant_pixels = np.count_nonzero(plant_mask)
     stressed_plant_pixels = np.count_nonzero(stressed_plant_mask)
-
+    
     plant_percent = (plant_pixels / total_pixels) * 100
     stress_percent_within_plants = (stressed_plant_pixels / plant_pixels) * 100 if plant_pixels > 0 else 0
-
+    
     # Save mask images
-    cv2.imwrite(os.path.join("Masking_Images/plant_mask_result_"+ time_str +".png"), plant_mask_display)
-    cv2.imwrite(os.path.join("Masking_Images/stressed_plant_mask_result_"+ time_str +".png"), stressed_plant_display)
+    cv2.imwrite(os.path.join("Masking_Images/plant_mask_result_"+ time_str +".jpg"), plant_mask_display)
+    cv2.imwrite(os.path.join("Masking_Images/stressed_plant_mask_result_"+ time_str +".jpg"), stressed_plant_display)
 
     # Save the results to the txt file
     with open(txt_path, "a") as f:
         f.write(f"ndvi_result_{time_str}\t{plant_percent:.2f}\t{stress_percent_within_plants:.2f}\n")
 
+    return stress_percent_within_plants
