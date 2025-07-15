@@ -44,10 +44,6 @@ def mainCode():
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(LED_PIN,GPIO.OUT)
 
-    #everything below this comment should be included in a while(1) loop that runs once every hour
-
-
-    timeStr = time.strftime("%m-%d-%Y_%H%M%S")
     timeStr = time.strftime("%m-%d-%Y_%H%M%S")
 
     #protocol for taking images
