@@ -207,7 +207,9 @@ def draw_polygon(event,x,y,flags,param):
                     WindowName = "DN:{}, reflectance:{}".format(int(mean_DN[-1]), reflectance[-1])
                     cv2.namedWindow(WindowName, cv2.WINDOW_NORMAL)
                     cv2.imshow(WindowName, masked_image)
+                    print ("Polygon Coordinates (x,y):" ,roi_corners)
                     roi_corners = []
+                    
         else:
             temp = image_used.copy()
             temp_zoom = temp.copy()
