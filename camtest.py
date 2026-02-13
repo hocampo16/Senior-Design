@@ -26,16 +26,16 @@ picam2.configure(picam2.create_preview_configuration())
 picam2.set_controls({"AwbEnable": False})
 picam2.set_controls({"AeEnable": False})
 picam2.set_controls({"Saturation": 0}) #turns image from mono red to b&w
-picam2.set_controls({"Contrast": 2, "Brightness":0.42})
+picam2.set_controls({"ExposureTime": 66666, "Brightness":0.42}) #exposuretime = 66666, brightness = 0.42 (brightness = 0.42 is to ensure that the max brightness value is 255
 
 
 wl = 1 # 0 = Red, 1 = NIR
 if wl == 0: #Red
-    picam2.set_controls({"ExposureTime": 66666, "AnalogueGain": 5})
+    picam2.set_controls({"Contrast": 2, "AnalogueGain": 1})
     setAngle(10)
     time.sleep(0.5)
 elif wl == 1: #NIR
-    picam2.set_controls({"ExposureTime": 66666, "AnalogueGain": 10})
+    picam2.set_controls({"Contrast": 3, "AnalogueGain": 5})
     setAngle(180)
     time.sleep(0.5)
 

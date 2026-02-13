@@ -14,7 +14,7 @@ def setAngle(angle):
     GPIO.output(8, False)
     pwm.ChangeDutyCycle(0)
 
-GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BOARD) #setting servo pwm to pin 8
 GPIO.setup(8, GPIO.OUT)
 pwm = GPIO.PWM(8, 50)
 pwm.start(0)
@@ -30,23 +30,23 @@ picam2.start()
 picam2.set_controls({"AwbEnable": False})
 picam2.set_controls({"AeEnable": False})
 picam2.set_controls({"Saturation": 0}) #turns image from mono red to b&w
-picam2.set_controls({"Contrast": 2, "Brightness":0.42}) #Brightness = 0.42 ensures that image can go up to 255
+picam2.set_controls({"ExposureTime": 66666, "Brightness":0.42}) #exposuretime = 66666, brightness = 0.42 (brightness = 0.42 is to ensure that the max brightness value is 255
 
 
-wl = 1 # 0 = Red, 1 = NIR
+wl = 0 # 0 = Red, 1 = NIR
 if wl == 0: #Red
-    picam2.set_controls({"ExposureTime": 66666, "AnalogueGain": 5})
+    picam2.set_controls({"Contrast": 2, "AnalogueGain": 1})
     setAngle(10)
     time.sleep(0.5)
 elif wl == 1: #NIR
-    picam2.set_controls({"ExposureTime": 66666, "AnalogueGain": 30})
+    picam2.set_controls({"Contrast": 2, "AnalogueGain": 10})
     setAngle(180)
     time.sleep(0.5)
 
 picam2.capture_file("test.jpg")
 img = cv2.imread("test.jpg")
 assert img is not None, "file could not be read, check with os.path.exists()"
-img = img[:,:,2] #gets only red band of photos
+img = img[:,:,2] #gets only red band of photos (BGR format)
 
 
 mask = np.zeros(img.shape[:2], np.uint8)
