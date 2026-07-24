@@ -1,8 +1,7 @@
 import AS7263_Pi as spec
-
+import matplotlib.pyplot as plt
 #Reboot the spectrometer, just in case
 spec.soft_reset()
-
 #Set the gain of the device between 0 and 3.  Higher gain = higher readings
 spec.set_gain(3)
 
@@ -11,6 +10,18 @@ spec.set_integration_time(50)
 
 #Set the board to continuously measure all colours
 spec.set_measurement_mode(2)
+#Wavelength labels for AS7263 channels
+wavelengths = [610, 680, 730, 760, 810, 860]
+
+#Create live graph
+plt.ion()
+fig, ax = plt.subplots()
+line, = ax.plot(wavelengths, [0, 0, 0, 0, 0, 0], marker='x')
+
+ax.set_xlabel("Wavelength (nm)")
+ax.set_ylabel("Intensity")
+ax.set_title("Live AS7263 Spectrum")
+ax.grid(True)
 
 try:
 	#Turn on the main LED
@@ -27,11 +38,21 @@ try:
 		#print("810   :" + str(results[4]))
 		print("860 :" + str(results[5]) + "\n")
 		
+			#Update graph with live readings
+		line.set_ydata(results)
+		ax.relim()
+		ax.autoscale_view()
+		plt.draw()
+		plt.pause(0.01)
+		fig.canvas.flush_events()
+		
 #When the script is stopped with control-C
 except KeyboardInterrupt:
-	#Set the board to measure just once (it stops after that)
+	#Set the board to measure just once (it stops after that)çç
 	spec.set_measurement_mode(3)
 	#Turn off the main LED
 	spec.disable_main_led()
 	#Notify the user
-	print("Manually stopped")	
+	plt.ioff()
+	plt.close()
+	print("Manually stopped")

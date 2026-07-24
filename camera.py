@@ -1,8 +1,12 @@
 from picamera2 import Picamera2, Preview, MappedArray
 import servo
 import time
+import cv2
+import os
 
 def config(tuningFile,AwB,Ae,Saturation,ExposureTime,Brightness):
+    
+    os.environ["LIBCAMERA_LOG_LEVELS"] = "3" #dusables log in shell unless there is an error
     
     tuning = Picamera2.load_tuning_file(tuningFile)
     picam2 = Picamera2(tuning=tuning)
@@ -24,7 +28,7 @@ def takePhoto(picam2, wavelengthSelect,showPreview, pin, output):
     if wavelengthSelect == 0: #Red
         picam2.set_controls({"Contrast": 2})
         picam2.set_controls({"AnalogueGain": 3})
-        servo.setAngle(pin,10)
+        servo.setAngle(pin,18)
         #wl = red
     elif wavelengthSelect == 1: #NIR
         picam2.set_controls({"Contrast": 2})
